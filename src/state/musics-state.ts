@@ -13,13 +13,30 @@ export interface Track {
 interface MusicState {
   tracks: Track[];
   isLoading: boolean;
+  current_index: number;
   setMusic: (files: FileList | null) => Promise<void>;
   clearMusic: () => void;
+  next: () => void;
+  prev: () => void;
 }
 
-export const useStoreMusics = create<MusicState>((set) => ({
+export const useStoreMusics = create<MusicState>((set, get) => ({
   tracks: [],
   isLoading: false,
+  current_index: 0,
+
+  next: () => {
+    const { current_index, tracks } = get();
+    if (current_index < tracks.length - 1) {
+      set({ current_index: current_index + 1 });
+    }
+  },
+  prev: () => {
+    const { current_index } = get();
+    if (current_index > 0) {
+      set({ current_index: current_index - 1 });
+    }
+  },
 
   setMusic: async (files) => {
     if (!files || files.length === 0) return;

@@ -1,13 +1,19 @@
 import { useStoreMusics } from "@/state/musics-state";
+import { useRef } from "react";
+import PrevButton from "./prev-button";
+import NextButton from "./next-button";
 
 export default function MusicPlayer() {
-  const { tracks } = useStoreMusics();
+  const { tracks, current_index } = useStoreMusics();
+  const input_music_ref = useRef<HTMLAudioElement | null>(null);
 
   if (!tracks || tracks.length === 0) return null;
-  const last_track = tracks[3];
+  const track = tracks[current_index].file;
   return (
     <div>
-      <audio src={URL.createObjectURL(last_track.file)} controls />
+      <PrevButton />
+      <NextButton />
+      <audio src={URL.createObjectURL(track)} controls ref={input_music_ref} />
     </div>
   );
 }
