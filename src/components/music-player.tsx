@@ -1,6 +1,6 @@
 import { useStoreMusics } from "@/state/musics-state";
 
-export default function AudioPlayer() {
+export default function MusicPlayer() {
   const { tracks } = useStoreMusics();
 
   if (!tracks || tracks.length === 0) return null;
