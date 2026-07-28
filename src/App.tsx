@@ -1,11 +1,11 @@
-import AudioPlayer from "./components/audio-player";
-import MediaInput from "./components/music-input";
+import MusicInput from "./components/music-input";
+import MusicPlayer from "./components/music-player";
 
 export default function App() {
   return (
     <div className="flex min-h-svh flex-col items-center justify-center">
-      <MediaInput />
-      <AudioPlayer />
+      <MusicInput />
+      <MusicPlayer />
     </div>
   );
 }

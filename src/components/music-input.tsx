@@ -4,7 +4,7 @@ import { useStoreMusics } from "@/state/musics-state";
 import { Button } from "./ui/button/button";
 import { Spinner } from "./ui/spinner";
 
-export default function MediaInput() {
+export default function MusicInput() {
   const { setMusic, isLoading } = useStoreMusics();
   return (
     <div>
