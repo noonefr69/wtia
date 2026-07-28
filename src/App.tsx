@@ -3,7 +3,7 @@ import { Button } from "./components/ui/button/button";
 function App() {
   return (
     <div className="flex min-h-svh flex-col items-center justify-center">
-      <Button variant={"ghost"}>Click me</Button>
+      <Button variant={"outline"}>Click me</Button>
     </div>
   );
 }
