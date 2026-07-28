@@ -5,8 +5,7 @@ import { Button } from "./ui/button/button";
 import { Spinner } from "./ui/spinner";
 
 export default function MediaInput() {
-  const { tracks, setMusic, isLoading } = useStoreMusics();
-  console.log(tracks);
+  const { setMusic, isLoading } = useStoreMusics();
   return (
     <div>
       <Button asChild variant={"outline"}>
