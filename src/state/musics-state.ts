@@ -1,14 +1,14 @@
 import { create } from "zustand";
 
 interface MusicState {
-  musics: FileList | null;
-  setMusics: (files: FileList | null) => void;
-  clearMusics: () => void;
+  music: FileList | null;
+  setMusic: (files: FileList | null) => void;
+  clearMusic: () => void;
 }
 
 export const useStoreMusics = create<MusicState>((set) => ({
-  musics: null,
+  music: null,
 
-  setMusics: (files) => set({ musics: files }),
-  clearMusics: () => set({ musics: null }),
+  setMusic: (files) => set({ music: files }),
+  clearMusic: () => set({ music: null }),
 }));

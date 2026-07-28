@@ -3,15 +3,15 @@ import { Label } from "./ui/label";
 import { useStoreMusics } from "@/state/musics-state";
 
 export default function MediaInput() {
-  const { musics, setMusics } = useStoreMusics();
-  console.log(musics);
+  const { music, setMusic } = useStoreMusics();
+  console.log(music);
   return (
     <div>
       <Label htmlFor="media_input">tab</Label>
       <Input
         onChange={(e) => {
           const files = e.target.files;
-          setMusics(files);
+          setMusic(files);
         }}
         type="file"
         id="media_input"
