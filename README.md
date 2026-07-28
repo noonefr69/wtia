@@ -11,7 +11,7 @@ Day 2: Metadata Parsing & Audio Engine
 
     Goal: Read the tags and actually play the sound.
     Tasks:
-        Install music-metadata-browser. Parse the metadata for every file added on Day 1.
+        DONE - Install music-metadata-browser. Parse the metadata for every file added on Day 1.
         Create an AudioPlayer hook/class. Wrap the native HTML5 <audio> element.
         Implement basic controls: Play, Pause, Next, Previous, Seek.
         Handle the onEnded event to auto-play the next track.
