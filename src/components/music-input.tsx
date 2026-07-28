@@ -1,13 +1,25 @@
 import { Input } from "@/components/ui/input";
 import { Label } from "./ui/label";
 import { useStoreMusics } from "@/state/musics-state";
+import { Button } from "./ui/button/button";
+import { Spinner } from "./ui/spinner";
 
 export default function MediaInput() {
-  const { music, setMusic } = useStoreMusics();
-  console.log(music);
+  const { tracks, setMusic, isLoading } = useStoreMusics();
+  console.log(tracks);
   return (
     <div>
-      <Label htmlFor="media_input">tab</Label>
+      <Button asChild variant={"outline"}>
+        <Label htmlFor="media_input">
+          {isLoading ? (
+            <>
+              Extracting music metadata <Spinner />
+            </>
+          ) : (
+            "select music directory"
+          )}
+        </Label>
+      </Button>
       <Input
         onChange={(e) => {
           const files = e.target.files;
