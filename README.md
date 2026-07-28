@@ -3,9 +3,9 @@ Day 1: Setup & File Ingestion
     Goal: Get files from the user's computer into the app.
     Tasks:
         DONE - Initialize Vite + React + TypeScript.
-        Create a file picker component (allow selecting single files or a whole folder).
-        Read the files and store them in your global state.
-        Tech tip: Use Zustand for state management. It’s much faster to set up than Redux.
+        DONE - Create a file picker component (allow selecting single files or a whole folder).
+        DONE - Read the files and store them in your global state.
+        DONE - Tech tip: Use Zustand for state management. It’s much faster to set up than Redux.
 
 Day 2: Metadata Parsing & Audio Engine
 

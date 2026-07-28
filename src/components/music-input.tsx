@@ -1,18 +1,18 @@
-"use client";
-
 import { Input } from "@/components/ui/input";
 import { Label } from "./ui/label";
-import { useState } from "react";
+import { useStoreMusics } from "@/state/musics-state";
 
 export default function MediaInput() {
-  const [media, setMedia] = useState<null | FileList>(null);
-
-  console.log(media);
+  const { musics, setMusics } = useStoreMusics();
+  console.log(musics);
   return (
     <div>
       <Label htmlFor="media_input">tab</Label>
       <Input
-        onChange={(e) => setMedia(e.target.files)}
+        onChange={(e) => {
+          const files = e.target.files;
+          setMusics(files);
+        }}
         type="file"
         id="media_input"
         name="media_input"
