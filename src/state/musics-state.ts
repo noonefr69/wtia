@@ -36,7 +36,9 @@ export const useStoreMusics = create<MusicState>((set) => ({
         let coverUrl: string | null = null;
         if (metadata.common.picture && metadata.common.picture.length > 0) {
           const picture = metadata.common.picture[0];
-          const blob = new Blob([picture.data], { type: picture.format });
+          const blob = new Blob([picture.data as BlobPart], {
+            type: picture.format,
+          });
           coverUrl = URL.createObjectURL(blob);
         }
 
