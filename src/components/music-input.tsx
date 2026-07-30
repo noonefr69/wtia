@@ -8,14 +8,17 @@ export default function MusicInput() {
   const { setMusic, isLoading } = useStoreMusics();
   return (
     <div>
-      <Button asChild variant={"outline"}>
+      <Button asChild variant={"link"} className="px-0">
         <Label htmlFor="media_input">
           {isLoading ? (
             <>
               Extracting music metadata <Spinner />
             </>
           ) : (
-            "select music directory"
+            <>
+              Select Directory Here{" "}
+              <span className="h-5 w-2 bg-primary animate-caret-blink"></span>
+            </>
           )}
         </Label>
       </Button>
