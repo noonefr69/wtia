@@ -6,7 +6,9 @@ import { Toaster } from "@/components/ui/sonner.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <App />
-    <Toaster />
+    <main className="font-fira">
+      <App />
+      <Toaster />
+    </main>
   </StrictMode>,
 );

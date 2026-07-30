@@ -3,5 +3,5 @@ import { Button } from "./ui/button/button";
 
 export default function NextButton() {
   const { next } = useStoreMusics();
-  return <Button onClick={() => next()}>Prev</Button>;
+  return <Button onClick={() => next()}>Next</Button>;
 }
