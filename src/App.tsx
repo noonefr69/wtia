@@ -1,4 +1,4 @@
-import AppLayout from "./components/app-layout";
+import AppLayout from "./components/terminal/app-layout";
 
 export default function App() {
   return (

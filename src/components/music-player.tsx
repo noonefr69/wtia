@@ -6,18 +6,18 @@ import { Button } from "./ui/button/button";
 import { toast } from "sonner";
 
 export default function MusicPlayer() {
-  const { tracks, current_index, clearMusic } = useStoreMusics();
-  const audio_ref = useRef<HTMLAudioElement | null>(null);
+  const { tracks, currentIndex, clearMusic } = useStoreMusics();
+  const audioRef = useRef<HTMLAudioElement | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
 
-  const current_track = tracks[current_index];
+  const currentTrack = tracks[currentIndex];
 
-  const audio_src = useMemo(() => {
-    if (!current_track) return null;
-    return URL.createObjectURL(current_track.file);
-  }, [current_track]);
+  const audioSrc = useMemo(() => {
+    if (!currentTrack) return null;
+    return URL.createObjectURL(currentTrack.file);
+  }, [currentTrack]);
 
-  function handle_error_play() {
+  function handleErrorPlay() {
     toast.error(
       `Browser blocked auto play. Click Play again or click next/prev button.`,
     );
@@ -26,26 +26,26 @@ export default function MusicPlayer() {
 
   useEffect(() => {
     return () => {
-      if (audio_src) {
-        URL.revokeObjectURL(audio_src);
+      if (audioSrc) {
+        URL.revokeObjectURL(audioSrc);
       }
     };
-  }, [audio_src]);
+  }, [audioSrc]);
 
   useEffect(() => {
-    if (audio_ref.current && current_track) {
-      audio_ref.current.play().catch(handle_error_play);
+    if (audioRef.current && currentTrack) {
+      audioRef.current.play().catch(handleErrorPlay);
     }
-  }, [current_index, current_track]);
+  }, [currentIndex, currentTrack]);
 
-  if (!current_track) return <div>No music selected</div>;
+  if (!currentTrack) return <div>No music selected</div>;
 
   function toggle_play() {
-    if (audio_ref.current) {
+    if (audioRef.current) {
       if (isPlaying) {
-        audio_ref.current.pause();
+        audioRef.current.pause();
       } else {
-        audio_ref.current.play().catch(handle_error_play);
+        audioRef.current.play().catch(handleErrorPlay);
       }
     }
   }
@@ -59,8 +59,8 @@ export default function MusicPlayer() {
         <Button onClick={clearMusic}>Clear</Button>
       </div>
       <audio
-        ref={audio_ref}
-        src={audio_src || ""}
+        ref={audioRef}
+        src={audioSrc || ""}
         onPause={() => setIsPlaying(false)}
         onPlay={() => setIsPlaying(true)}
       />

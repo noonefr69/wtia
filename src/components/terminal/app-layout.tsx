@@ -1,14 +1,15 @@
 import { useStoreMusics } from "@/state/musics-state";
-import { Card } from "./ui/card";
-import MusicInput from "./music-input";
-import MusicPlayer from "./music-player";
+import { Card } from "../ui/card";
+import MusicInput from "../music-input";
+import MusicPlayer from "../music-player";
+import TerminalHeader from "./header";
 
 export default function AppLayout() {
   const { tracks } = useStoreMusics();
   return (
     <Card className="h-full p-4 grid grid-cols-1 grid-rows-[auto_1fr_auto]">
       <Card id="title" className="p-2">
-        header
+        <TerminalHeader />
       </Card>
       <div className="grid grid-cols-9 gap-4">
         <Card id="section" className="col-span-9 md:col-span-6 p-2">

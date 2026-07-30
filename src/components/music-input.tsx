@@ -12,7 +12,7 @@ export default function MusicInput() {
         <Label htmlFor="media_input">
           {isLoading ? (
             <>
-              Extracting music metadata <Spinner />
+              <Spinner />
             </>
           ) : (
             <>
