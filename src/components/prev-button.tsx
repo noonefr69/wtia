@@ -3,5 +3,9 @@ import { Button } from "./ui/button/button";
 
 export default function PrevButton() {
   const { prev } = useStoreMusics();
-  return <Button onClick={() => prev()}>Prev</Button>;
+  return (
+    <Button className="rotate-180" onClick={() => prev()}>
+      ▶︎‖
+    </Button>
+  );
 }

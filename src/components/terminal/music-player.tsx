@@ -99,7 +99,7 @@ export default function MusicPlayer() {
     <div className="h-full flex flex-col">
       {!currentTrack.coverUrl ? (
         <div className="w-full aspect-square flex items-center justify-center overflow-hidden">
-          <pre className="font-mono text-[4px] sm:text-[8px] leading-none whitespace-pre text-center select-none">
+          <pre className="font-mono text-[4px] lg:text-[8px] leading-none whitespace-pre text-center select-none">
             {notFoundImageAschii}
           </pre>
         </div>
@@ -110,9 +110,18 @@ export default function MusicPlayer() {
           className="w-full aspect-square object-cover"
         />
       )}
-      <PrevButton />
-      <NextButton />
-      <Button onClick={toggle_play}>{isPlaying ? "Pause" : "Play"}</Button>
+      <div className="mt-2">duration</div>
+      <div className="flex flex-col mt-2">
+        <div className="grid grid-cols-3">
+          <Button>⏪︎</Button>
+          <Button onClick={toggle_play}>{isPlaying ? "⏸︎" : "⏵︎"}</Button>
+          <Button>⏩︎</Button>
+        </div>
+        <div className="grid grid-cols-2">
+          <PrevButton />
+          <NextButton />
+        </div>
+      </div>
       <audio
         ref={audioRef}
         src={audioSrc || ""}
