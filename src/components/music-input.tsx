@@ -15,10 +15,10 @@ export default function MusicInput() {
               <Spinner />
             </>
           ) : (
-            <>
-              select $PATH here{" "}
+            <div className="flex items-center">
+              select $PATH here
               <span className="h-5 w-2 bg-primary animate-caret-blink"></span>
-            </>
+            </div>
           )}
         </Label>
       </Button>
