@@ -6,11 +6,14 @@ import NextButton from "../next-button";
 import PrevButton from "../prev-button";
 import { notFoundImageAschii } from "@/ascii/not-found-image";
 import { noMusicAscii } from "@/ascii/no-music-ascii";
+import { Slider } from "@/components/ui/slider";
 
 export default function MusicPlayer() {
   const { tracks, currentIndex } = useStoreMusics();
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [musicVolume, setMusicVolume] = useState(1);
+  const [isVolumeMute, setIsVolumeMute] = useState(false);
 
   const containerRef = useRef<HTMLDivElement>(null);
   const preRef = useRef<HTMLPreElement>(null);
@@ -39,6 +42,7 @@ export default function MusicPlayer() {
 
   useEffect(() => {
     if (audioRef.current && currentTrack) {
+      setMusicVolume(audioRef.current?.volume ?? 1);
       audioRef.current.play().catch(handleErrorPlay);
     }
   }, [currentIndex, currentTrack]);
@@ -95,6 +99,19 @@ export default function MusicPlayer() {
     }
   }
 
+  const handleVolumeChange = (value: number[]) => {
+    const newVolume = value[0];
+    setMusicVolume(newVolume);
+    if (audioRef.current) {
+      audioRef.current.volume = newVolume;
+      if (audioRef.current.volume === 0 || audioRef.current.volume < 0.2) {
+        setIsVolumeMute(true);
+      } else {
+        setIsVolumeMute(false);
+      }
+    }
+  };
+
   return (
     <div className="h-full flex flex-col">
       {!currentTrack.coverUrl ? (
@@ -121,6 +138,20 @@ export default function MusicPlayer() {
           <PrevButton />
           <NextButton />
         </div>
+      </div>
+      <div className="mt-2 flex items-center gap-2">
+        {/*{` 🕪`}*/}
+        <span className="rotate-180 select-none text-2xl">
+          {isVolumeMute ? "🕩" : `🕪`}
+        </span>
+        <Slider
+          value={[musicVolume]}
+          onValueChange={handleVolumeChange}
+          defaultValue={[1]}
+          max={1}
+          min={0}
+          step={0.05}
+        />
       </div>
       <audio
         ref={audioRef}
