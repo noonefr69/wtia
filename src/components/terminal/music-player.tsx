@@ -7,6 +7,7 @@ import PrevButton from "../prev-button";
 import { notFoundImageAschii } from "@/ascii/not-found-image";
 import { noMusicAscii } from "@/ascii/no-music-ascii";
 import { Slider } from "@/components/ui/slider";
+import { flowerAscii } from "@/ascii/flower-ascii";
 
 export default function MusicPlayer() {
   const { tracks, currentIndex } = useStoreMusics();
@@ -153,6 +154,11 @@ export default function MusicPlayer() {
           min={0}
           step={0.05}
         />
+      </div>
+      <div className="flex-1 flex items-center justify-center">
+        <pre className="text-[4px] lg:text-[6px] select-none md:block hidden">
+          {flowerAscii}
+        </pre>
       </div>
       <audio
         ref={audioRef}
