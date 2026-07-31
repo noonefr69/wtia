@@ -8,7 +8,7 @@ export default function MusicInput() {
   const { setMusic, isLoading } = useStoreMusics();
   return (
     <div>
-      <Button asChild variant={"link"} className="px-0">
+      <Button asChild variant={"link"} className="p-0">
         <Label htmlFor="media_input">
           {isLoading ? (
             <>
@@ -16,7 +16,7 @@ export default function MusicInput() {
             </>
           ) : (
             <>
-              Select Directory Here{" "}
+              select $PATH here{" "}
               <span className="h-5 w-2 bg-primary animate-caret-blink"></span>
             </>
           )}

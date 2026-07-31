@@ -1,7 +1,7 @@
 import { Card } from "../ui/card";
-import MusicPlayer from "../music-player";
 import TerminalHeader from "./header";
 import { MusicLists } from "./music-lists";
+import MusicPlayer from "./music-player";
 
 export default function AppLayout() {
   return (
@@ -13,7 +13,10 @@ export default function AppLayout() {
         <Card id="section" className="col-span-9 md:col-span-6 p-2">
           <MusicLists />
         </Card>
-        <Card id="aside" className="col-span-9 md:col-span-3 p-2">
+        <Card
+          id="aside"
+          className="col-span-9 md:col-span-3 p-2 min-h-0 overflow-y-scroll"
+        >
           <MusicPlayer />
         </Card>
       </div>
