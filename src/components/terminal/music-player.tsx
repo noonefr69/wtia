@@ -124,7 +124,8 @@ export default function MusicPlayer() {
         <img
           src={currentTrack.coverUrl ?? ""}
           alt={currentTrack.artist + currentTrack.title}
-          className="w-full aspect-square object-cover"
+          className="w-full aspect-square object-cover brightness-75 opacity-80"
+          style={{ filter: "saturate(0.0)" }}
         />
       )}
       <div className="mt-2">duration</div>
