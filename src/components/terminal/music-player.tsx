@@ -16,11 +16,20 @@ export default function MusicPlayer() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [musicVolume, setMusicVolume] = useState(1);
   const [isVolumeMute, setIsVolumeMute] = useState(false);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
 
   const containerRef = useRef<HTMLDivElement>(null);
   const preRef = useRef<HTMLPreElement>(null);
 
   const currentTrack = tracks[currentIndex];
+
+  function formatTime(sec: number) {
+    if (!isFinite(sec) || sec < 0) return `00:00`;
+    const mins = Math.floor(sec / 60);
+    const secs = Math.floor(sec % 60);
+    return `${mins.toString().padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
+  }
 
   const audioSrc = useMemo(() => {
     if (!currentTrack) return null;
@@ -137,7 +146,23 @@ export default function MusicPlayer() {
           style={{ filter: "saturate(0.0)" }}
         />
       )}
-      <div className="mt-2">duration</div>
+      <div className="mt-2 flex items-center justify-between gap-2">
+        {formatTime(currentTime)}
+        <Slider
+          value={[currentTime]}
+          max={duration}
+          min={0}
+          disabled={!duration}
+          step={0.1}
+          onValueChange={([newVal]) => {
+            if (audioRef.current) {
+              audioRef.current.currentTime = newVal;
+              setCurrentTime(newVal);
+            }
+          }}
+        />
+        {formatTime(duration)}
+      </div>
       <div className="flex flex-col mt-2">
         <div className="grid grid-cols-3">
           <Button>⏪︎</Button>
@@ -173,6 +198,16 @@ export default function MusicPlayer() {
         src={audioSrc || ""}
         onPause={() => setIsPlaying(false)}
         onPlay={() => setIsPlaying(true)}
+        onTimeUpdate={() => {
+          if (audioRef.current) {
+            setCurrentTime(audioRef.current.currentTime);
+          }
+        }}
+        onLoadedMetadata={() => {
+          if (audioRef.current) {
+            setDuration(audioRef.current.duration);
+          }
+        }}
       />
     </div>
   );
