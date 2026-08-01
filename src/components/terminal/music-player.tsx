@@ -4,7 +4,8 @@ import { toast } from "sonner";
 import { Button } from "../ui/button/button";
 import NextButton from "../next-button";
 import PrevButton from "../prev-button";
-import { notFoundImageAschii } from "@/ascii/not-found-image";
+import notFoundImageAsciiLight from "@/ascii/asscii-light.png";
+import notFoundImageAschiiDark from "@/ascii/asscii-dark.png";
 import { noMusicAscii } from "@/ascii/no-music-ascii";
 import { Slider } from "@/components/ui/slider";
 import { flowerAscii } from "@/ascii/flower-ascii";
@@ -116,11 +117,18 @@ export default function MusicPlayer() {
   return (
     <div className="h-full flex flex-col">
       {!currentTrack.coverUrl ? (
-        <div className="w-full aspect-square flex items-center justify-center overflow-hidden">
-          <pre className="font-mono text-[4px] lg:text-[8px] leading-none whitespace-pre text-center select-none">
-            {notFoundImageAschii}
-          </pre>
-        </div>
+        <>
+          <img
+            src={notFoundImageAsciiLight}
+            alt="ascii-light"
+            className="w-full dark:hidden block aspect-square object-cover"
+          />
+          <img
+            src={notFoundImageAschiiDark}
+            alt="ascii-dark"
+            className="w-full dark:block hidden aspect-square object-cover"
+          />
+        </>
       ) : (
         <img
           src={currentTrack.coverUrl ?? ""}
