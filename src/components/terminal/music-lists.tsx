@@ -3,7 +3,7 @@ import MusicInput from "../music-input";
 import { Button } from "../ui/button/button";
 
 export function MusicLists() {
-  const { tracks, currentIndex } = useStoreMusics();
+  const { tracks, currentIndex, setCurrentIndex } = useStoreMusics();
   const currentTrack = tracks[currentIndex];
 
   return (
@@ -23,6 +23,9 @@ export function MusicLists() {
             return (
               <li key={i}>
                 <Button
+                  onClick={() => {
+                    setCurrentIndex(i);
+                  }}
                   variant={"ghost"}
                   className={`overflow-x-hidden w-full justify-baseline ${track.title === currentTrack.title && track.artist === currentTrack.artist ? "bg-accent" : ""}`}
                   size={"lg"}

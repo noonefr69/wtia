@@ -14,6 +14,7 @@ interface MusicState {
   tracks: Track[];
   isLoading: boolean;
   currentIndex: number;
+  setCurrentIndex: (index: number) => void;
   setMusic: (files: FileList | null) => Promise<void>;
   clearMusic: () => void;
   next: () => void;
@@ -24,6 +25,10 @@ export const useStoreMusics = create<MusicState>((set, get) => ({
   tracks: [],
   isLoading: false,
   currentIndex: 0,
+
+  setCurrentIndex: (index) => {
+    set({ currentIndex: index });
+  },
 
   next: () => {
     const { currentIndex, tracks } = get();
