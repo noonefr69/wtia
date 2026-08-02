@@ -165,9 +165,33 @@ export default function MusicPlayer() {
       </div>
       <div className="flex flex-col mt-2">
         <div className="grid grid-cols-3">
-          <Button>⏪︎</Button>
+          <Button
+            onClick={() => {
+              if (audioRef.current) {
+                audioRef.current.currentTime = Math.max(
+                  0,
+                  audioRef.current.currentTime - 5,
+                );
+                setCurrentTime(audioRef.current.currentTime);
+              }
+            }}
+          >
+            ⏪︎
+          </Button>
           <Button onClick={toggle_play}>{isPlaying ? "⏸︎" : "⏵︎"}</Button>
-          <Button>⏩︎</Button>
+          <Button
+            onClick={() => {
+              if (audioRef.current) {
+                audioRef.current.currentTime = Math.max(
+                  0,
+                  audioRef.current.currentTime + 5,
+                );
+                setCurrentTime(audioRef.current.currentTime);
+              }
+            }}
+          >
+            ⏩︎
+          </Button>
         </div>
         <div className="grid grid-cols-2">
           <PrevButton />
