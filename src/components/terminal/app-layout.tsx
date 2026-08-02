@@ -1,4 +1,5 @@
 import { Card } from "../ui/card";
+import TerminalFooter from "./footer";
 import TerminalHeader from "./header";
 import { MusicLists } from "./music-lists";
 import MusicPlayer from "./music-player";
@@ -21,7 +22,7 @@ export default function AppLayout() {
         </Card>
       </div>
       <Card id="footer" className="p-2">
-        footer
+        <TerminalFooter />
       </Card>
     </Card>
   );

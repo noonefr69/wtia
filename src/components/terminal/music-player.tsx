@@ -153,7 +153,7 @@ export default function MusicPlayer() {
           max={duration}
           min={0}
           disabled={!duration}
-          step={0.1}
+          step={0.05}
           onValueChange={([newVal]) => {
             if (audioRef.current) {
               audioRef.current.currentTime = newVal;
