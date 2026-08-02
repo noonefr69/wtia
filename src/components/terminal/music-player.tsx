@@ -11,7 +11,7 @@ import { Slider } from "@/components/ui/slider";
 import { flowerAscii } from "@/ascii/flower-ascii";
 
 export default function MusicPlayer() {
-  const { tracks, currentIndex } = useStoreMusics();
+  const { tracks, currentIndex, next } = useStoreMusics();
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [musicVolume, setMusicVolume] = useState(1);
@@ -198,6 +198,7 @@ export default function MusicPlayer() {
         src={audioSrc || ""}
         onPause={() => setIsPlaying(false)}
         onPlay={() => setIsPlaying(true)}
+        onEnded={next}
         onTimeUpdate={() => {
           if (audioRef.current) {
             setCurrentTime(audioRef.current.currentTime);
