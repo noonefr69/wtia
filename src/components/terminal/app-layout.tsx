@@ -21,9 +21,9 @@ export default function AppLayout() {
           <MusicPlayer />
         </Card>
       </div>
-      <Card id="footer" className="p-2">
+      <div id="footer" className="p-2">
         <TerminalFooter />
-      </Card>
+      </div>
     </Card>
   );
 }
