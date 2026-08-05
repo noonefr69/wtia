@@ -1,7 +1,7 @@
 import { useStoreMusics } from "@/state/musics-state";
 import MusicInput from "../music-input";
 import { Button } from "../ui/button/button";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Input } from "../ui/input";
 
 export function MusicLists() {
@@ -9,12 +9,13 @@ export function MusicLists() {
   const currentTrack = tracks[currentIndex];
   const [isSearchInputOpen, setIsSearchInputOpen] = useState(false);
   const searchInputRef = useRef<HTMLInputElement>(null);
+  const [inputValue, setInputValue] = useState("");
 
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
       if (e.key === "?") {
         e.preventDefault();
-        setIsSearchInputOpen((prev) => !prev);
+        setIsSearchInputOpen(true);
       }
 
       if (e.key === "Escape" && isSearchInputOpen) setIsSearchInputOpen(false);
@@ -29,6 +30,15 @@ export function MusicLists() {
       searchInputRef.current?.focus();
     }
   }, [isSearchInputOpen]);
+
+  const filteredListsBySearch = useMemo(() => {
+    return tracks.filter((track) => {
+      return (
+        track.title.toLowerCase().includes(inputValue.toLowerCase()) ||
+        track.artist.toLowerCase().includes(inputValue.toLowerCase())
+      );
+    });
+  }, [inputValue, tracks]);
 
   return (
     <div className="flex flex-col h-full overflow-hidden">
@@ -48,10 +58,12 @@ export function MusicLists() {
               ref={searchInputRef}
               className="mb-4 mt-1 w-4/5 mx-auto"
               placeholder="Search...^-^"
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
             />
           ) : null}
 
-          {tracks.map((track, i) => {
+          {filteredListsBySearch.map((track, i) => {
             return (
               <li key={track.id}>
                 <Button
