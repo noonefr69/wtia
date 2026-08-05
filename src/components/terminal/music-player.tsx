@@ -9,7 +9,7 @@ import { Slider } from "@/components/ui/slider";
 import { flowerAscii } from "@/ascii/flower-ascii";
 import PrevButton from "../prev-button";
 import NextButton from "../next-button";
-import { RedoIcon, UndoIcon } from "lucide-react";
+import { Pause, Play, RedoIcon, UndoIcon } from "lucide-react";
 // import { RedoIcon } from "lucide-react";
 
 export default function MusicPlayer() {
@@ -245,7 +245,9 @@ export default function MusicPlayer() {
           >
             <UndoIcon />
           </Button>
-          <Button onClick={toggle_play}>{isPlaying ? "⏸︎" : "⏵︎"}</Button>
+          <Button onClick={toggle_play}>
+            {isPlaying ? <Pause /> : <Play />}
+          </Button>
           <Button
             onClick={() => {
               if (audioRef.current) {
