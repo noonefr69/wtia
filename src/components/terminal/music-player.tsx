@@ -1,5 +1,5 @@
 import { useStoreMusics } from "@/state/musics-state";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { toast } from "sonner";
 import { Button } from "../ui/button/button";
 import NextButton from "../next-button";
@@ -36,12 +36,12 @@ export default function MusicPlayer() {
     return URL.createObjectURL(currentTrack.file);
   }, [currentTrack]);
 
-  function handleErrorPlay() {
+  const handleErrorPlay = useCallback(() => {
     toast.error(
       `Browser blocked auto play. Click Play again or click next/prev button.`,
     );
     setIsPlaying(false);
-  }
+  }, []);
 
   useEffect(() => {
     return () => {
@@ -56,7 +56,7 @@ export default function MusicPlayer() {
       setMusicVolume(audioRef.current?.volume ?? 1);
       audioRef.current.play().catch(handleErrorPlay);
     }
-  }, [currentIndex, currentTrack]);
+  }, [currentIndex, currentTrack, handleErrorPlay]);
 
   useEffect(() => {
     if (!containerRef.current || !preRef.current) return;
@@ -85,6 +85,94 @@ export default function MusicPlayer() {
     return () => resizeObserver.disconnect();
   }, []);
 
+  const toggle_play = useCallback(() => {
+    if (audioRef.current) {
+      if (isPlaying) {
+        audioRef.current.pause();
+      } else {
+        audioRef.current.play().catch(handleErrorPlay);
+      }
+    }
+  }, [isPlaying, handleErrorPlay]);
+
+  const handleVolumeChange = useCallback((newVolume: number) => {
+    const safeVolume = Math.min(1, Math.max(0, newVolume));
+
+    setMusicVolume(safeVolume);
+
+    if (audioRef.current) {
+      audioRef.current.volume = safeVolume;
+      if (safeVolume === 0 || safeVolume < 0.2) {
+        setIsVolumeMute(true);
+      } else {
+        setIsVolumeMute(false);
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    function handleKeyDown(e: KeyboardEvent) {
+      const activeEl = document.activeElement;
+      if (!activeEl) return;
+
+      const isPlayerFocused =
+        activeEl.id === "aside" || activeEl.closest("#aside") !== null;
+      if (!isPlayerFocused) return;
+
+      const target = e.target as HTMLElement;
+      if (target.tagName === "INPUT" || target.tagName === "TEXTAREA") return;
+
+      if (e.key === "h") {
+        e.preventDefault();
+        prev();
+      } else if (e.key === "l") {
+        e.preventDefault();
+        next();
+      } else if (e.key === "u") {
+        e.preventDefault();
+        if (audioRef.current) {
+          audioRef.current.currentTime = Math.max(
+            0,
+            audioRef.current.currentTime - 5,
+          );
+          setCurrentTime(audioRef.current.currentTime);
+        }
+      } else if (e.key === "i") {
+        e.preventDefault();
+        if (audioRef.current) {
+          const newTime = Math.min(duration, audioRef.current.currentTime + 5);
+          audioRef.current.currentTime = newTime;
+          setCurrentTime(newTime);
+        }
+      } else if (e.key === " ") {
+        e.preventDefault();
+        toggle_play();
+      } else if (e.key === "y") {
+        e.preventDefault();
+        if (audioRef.current) {
+          handleVolumeChange(audioRef.current?.volume - 0.05);
+        }
+      } else if (e.key === "o") {
+        e.preventDefault();
+        if (audioRef.current) {
+          handleVolumeChange(audioRef.current.volume + 0.05);
+        }
+      } else if (e.key === "m") {
+        e.preventDefault();
+        if (audioRef.current) {
+          if (audioRef.current.volume === 0) {
+            handleVolumeChange(1);
+          } else {
+            handleVolumeChange(0);
+          }
+        }
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [prev, next, duration, toggle_play, handleVolumeChange]);
+
   if (!currentTrack || tracks.length === 0)
     return (
       <div
@@ -99,29 +187,6 @@ export default function MusicPlayer() {
         </pre>
       </div>
     );
-
-  function toggle_play() {
-    if (audioRef.current) {
-      if (isPlaying) {
-        audioRef.current.pause();
-      } else {
-        audioRef.current.play().catch(handleErrorPlay);
-      }
-    }
-  }
-
-  const handleVolumeChange = (value: number[]) => {
-    const newVolume = value[0];
-    setMusicVolume(newVolume);
-    if (audioRef.current) {
-      audioRef.current.volume = newVolume;
-      if (audioRef.current.volume === 0 || audioRef.current.volume < 0.2) {
-        setIsVolumeMute(true);
-      } else {
-        setIsVolumeMute(false);
-      }
-    }
-  };
 
   return (
     <div className="h-full flex flex-col">
@@ -205,7 +270,7 @@ export default function MusicPlayer() {
         </span>
         <Slider
           value={[musicVolume]}
-          onValueChange={handleVolumeChange}
+          onValueChange={(value) => handleVolumeChange(value[0])}
           defaultValue={[1]}
           max={1}
           min={0}
