@@ -21,7 +21,7 @@ Day 3: The Terminal UI (CSS & Layout)
     Goal: Make it look like a terminal.
     Tasks:
         DONE - Set up a monospace font (e.g., Fira Code, JetBrains Mono, or VT323).
-        HALF DONE - Build the layout:
+        DONE - Build the layout:
             Top bar: Now Playing (Title - Artist).
             Left/Main panel: The Playlist (scrollable list of tracks).
             Bottom bar: Playback controls and progress bar.
