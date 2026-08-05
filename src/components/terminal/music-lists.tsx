@@ -21,13 +21,13 @@ export function MusicLists() {
         <ul className="overflow-y-scroll">
           {tracks.map((track, i) => {
             return (
-              <li key={i}>
+              <li key={track.id}>
                 <Button
                   onClick={() => {
                     setCurrentIndex(i);
                   }}
                   variant={"ghost"}
-                  className={`overflow-x-hidden w-full justify-baseline ${track.title === currentTrack.title && track.artist === currentTrack.artist ? "bg-accent" : ""}`}
+                  className={`overflow-x-hidden w-full justify-baseline ${track.id === currentTrack.id ? "bg-accent" : ""}`}
                   size={"lg"}
                 >
                   {track.artist} - {track.title}
