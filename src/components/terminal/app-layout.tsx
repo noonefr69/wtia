@@ -5,9 +5,13 @@ import TerminalHeader from "./header";
 import { MusicLists } from "./music-lists";
 import MusicPlayer from "./music-player";
 import { useFocusedDiv } from "@/state/app-ref";
+import { useStoreMusics } from "@/state/musics-state";
 
 export default function AppLayout() {
   const setFocuesedPanel = useFocusedDiv((s) => s.setFocusedPanel);
+  const tracks = useStoreMusics((s) => s.tracks);
+
+  const isMusicLoaded = tracks && tracks.length > 0;
 
   const headerRef = useRef<HTMLDivElement>(null);
   const listsRef = useRef<HTMLDivElement>(null);
@@ -15,6 +19,7 @@ export default function AppLayout() {
   const footerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (!isMusicLoaded) return;
     function handleKeyDown(e: KeyboardEvent) {
       const target = e.target as HTMLElement;
       if (
@@ -42,14 +47,14 @@ export default function AppLayout() {
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, []);
+  }, [isMusicLoaded, setFocuesedPanel]);
 
   return (
     <Card className="h-full p-4 grid grid-cols-1 grid-rows-[auto_1fr_auto]">
       <Card
         ref={headerRef}
         id="title"
-        tabIndex={-1}
+        tabIndex={isMusicLoaded ? -1 : undefined}
         className="p-2 focus:ring-primary outline-none duration-150"
       >
         <TerminalHeader />
@@ -58,14 +63,14 @@ export default function AppLayout() {
         <Card
           id="section"
           ref={listsRef}
-          tabIndex={-1}
+          tabIndex={isMusicLoaded ? -1 : undefined}
           className="col-span-9 md:col-span-6 p-2 outline-none focus:ring-primary duration-150"
         >
           <MusicLists />
         </Card>
         <Card
           id="aside"
-          tabIndex={-1}
+          tabIndex={isMusicLoaded ? -1 : undefined}
           ref={playerRef}
           className="col-span-9 md:col-span-3 p-2 min-h-0 overflow-y-scroll outline-none focus:ring-primary duration-150"
         >
@@ -76,7 +81,7 @@ export default function AppLayout() {
         id="footer"
         className="duration-150 p-2 focus:ring-primary focus:ring outline-none"
         ref={footerRef}
-        tabIndex={-1}
+        tabIndex={isMusicLoaded ? -1 : undefined}
       >
         <TerminalFooter />
       </div>

@@ -27,9 +27,9 @@ export default function TerminalFooter() {
               <div>list</div>
             ) : focusedPanel === "player" ? (
               <div>player</div>
-            ) : (
+            ) : focusedPanel === "footer" ? (
               <div>footer</div>
-            )}
+            ) : null}
           </div>
           <div>settings</div>
         </div>
