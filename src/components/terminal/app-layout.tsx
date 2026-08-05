@@ -4,8 +4,10 @@ import TerminalFooter from "./footer";
 import TerminalHeader from "./header";
 import { MusicLists } from "./music-lists";
 import MusicPlayer from "./music-player";
+import { useStoreMusics } from "@/state/musics-state";
 
 export default function AppLayout() {
+  const { next, prev } = useStoreMusics();
   const headerRef = useRef<HTMLDivElement>(null);
   const listsRef = useRef<HTMLDivElement>(null);
   const playerRef = useRef<HTMLDivElement>(null);
@@ -53,6 +55,19 @@ export default function AppLayout() {
         </Card>
         <Card
           id="aside"
+          onKeyDown={(e) => {
+            const target = e.target as HTMLElement;
+            if (target.tagName === "INPUT" || target.tagName === "TEXTAREA")
+              return;
+
+            if (e.key === "h") {
+              e.preventDefault();
+              prev();
+            } else if (e.key === "l") {
+              e.preventDefault();
+              next();
+            }
+          }}
           tabIndex={-1}
           ref={playerRef}
           className="col-span-9 md:col-span-3 p-2 min-h-0 overflow-y-scroll outline-none focus:ring-primary duration-150"
