@@ -5,8 +5,8 @@ export default function TerminalHeader() {
   if (!tracks || tracks.length === 0) return <h1>Wtia</h1>;
 
   return (
-    <>
+    <h1 className="truncate">
       {tracks[currentIndex].artist} - {tracks[currentIndex].title}
-    </>
+    </h1>
   );
 }

@@ -2,13 +2,15 @@ import { useStoreMusics } from "@/state/musics-state";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { toast } from "sonner";
 import { Button } from "../ui/button/button";
-import NextButton from "../next-button";
-import PrevButton from "../prev-button";
 import notFoundImageAsciiLight from "@/ascii/asscii-light.png";
 import notFoundImageAschiiDark from "@/ascii/asscii-dark.png";
 import { noMusicAscii } from "@/ascii/no-music-ascii";
 import { Slider } from "@/components/ui/slider";
 import { flowerAscii } from "@/ascii/flower-ascii";
+import PrevButton from "../prev-button";
+import NextButton from "../next-button";
+import { RedoIcon, UndoIcon } from "lucide-react";
+// import { RedoIcon } from "lucide-react";
 
 export default function MusicPlayer() {
   const { tracks, currentIndex, next, prev } = useStoreMusics();
@@ -241,7 +243,7 @@ export default function MusicPlayer() {
               }
             }}
           >
-            ⏪︎
+            <UndoIcon />
           </Button>
           <Button onClick={toggle_play}>{isPlaying ? "⏸︎" : "⏵︎"}</Button>
           <Button
@@ -255,7 +257,7 @@ export default function MusicPlayer() {
               }
             }}
           >
-            ⏩︎
+            <RedoIcon />
           </Button>
         </div>
         <div className="grid grid-cols-2">
