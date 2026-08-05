@@ -18,7 +18,10 @@ export function MusicLists() {
         setIsSearchInputOpen(true);
       }
 
-      if (e.key === "Escape" && isSearchInputOpen) setIsSearchInputOpen(false);
+      if (e.key === "Escape" && isSearchInputOpen) {
+        setIsSearchInputOpen(false);
+        setInputValue("");
+      }
     }
 
     window.addEventListener("keydown", handleKeyDown);
