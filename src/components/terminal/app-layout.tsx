@@ -4,8 +4,11 @@ import TerminalFooter from "./footer";
 import TerminalHeader from "./header";
 import { MusicLists } from "./music-lists";
 import MusicPlayer from "./music-player";
+import { useFocusedDiv } from "@/state/app-ref";
 
 export default function AppLayout() {
+  const setFocuesedPanel = useFocusedDiv((s) => s.setFocusedPanel);
+
   const headerRef = useRef<HTMLDivElement>(null);
   const listsRef = useRef<HTMLDivElement>(null);
   const playerRef = useRef<HTMLDivElement>(null);
@@ -22,10 +25,19 @@ export default function AppLayout() {
         return;
       }
 
-      if (e.key === "1") headerRef.current?.focus();
-      else if (e.key === "2") listsRef.current?.focus();
-      else if (e.key === "3") playerRef.current?.focus();
-      else if (e.key === "4") footerRef.current?.focus();
+      if (e.key === "1") {
+        headerRef.current?.focus();
+        setFocuesedPanel("header");
+      } else if (e.key === "2") {
+        listsRef.current?.focus();
+        setFocuesedPanel("list");
+      } else if (e.key === "3") {
+        playerRef.current?.focus();
+        setFocuesedPanel("player");
+      } else if (e.key === "4") {
+        footerRef.current?.focus();
+        setFocuesedPanel("footer");
+      }
     }
 
     window.addEventListener("keydown", handleKeyDown);
