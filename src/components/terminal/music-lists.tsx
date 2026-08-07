@@ -50,39 +50,40 @@ export function MusicLists() {
           <span className="">
             <span className="text-indigo-800">wtia </span>in{" "}
             <span className="text-green-800">~</span>{" "}
-            <span className="text-orange-800">ꥃ</span>
+            <span className="text-orange-800">here</span>
           </span>
           <MusicInput />
         </div>
       ) : (
-        <ul className="overflow-y-scroll relative flex flex-col">
+        <>
+          <ul className="overflow-y-scroll relative flex flex-col h-full">
+            {filteredListsBySearch.map((track, i) => {
+              return (
+                <li key={track.id}>
+                  <Button
+                    onClick={() => {
+                      setCurrentIndex(i);
+                    }}
+                    variant={"ghost"}
+                    className={`overflow-x-hidden w-full justify-baseline ${track.id === currentTrack.id ? "bg-accent" : ""}`}
+                    size={"lg"}
+                  >
+                    {track.artist} - {track.title}
+                  </Button>
+                </li>
+              );
+            })}
+          </ul>
           {isSearchInputOpen ? (
             <Input
               ref={searchInputRef}
-              className="mb-4 mt-1 w-4/5 mx-auto"
+              className="focus-visible:ring-0 ring-0 border-0 bg-card! sticky bottom-0 z-10"
               placeholder="Search...^-^"
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
             />
           ) : null}
-
-          {filteredListsBySearch.map((track, i) => {
-            return (
-              <li key={track.id}>
-                <Button
-                  onClick={() => {
-                    setCurrentIndex(i);
-                  }}
-                  variant={"ghost"}
-                  className={`overflow-x-hidden w-full justify-baseline ${track.id === currentTrack.id ? "bg-accent" : ""}`}
-                  size={"lg"}
-                >
-                  {track.artist} - {track.title}
-                </Button>
-              </li>
-            );
-          })}
-        </ul>
+        </>
       )}
     </div>
   );
