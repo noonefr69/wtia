@@ -13,7 +13,7 @@ export function MusicLists() {
 
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
-      if (e.key === "?") {
+      if (e.key === "?" || (e.key === "/" && e.shiftKey)) {
         e.preventDefault();
         setIsSearchInputOpen(true);
       }
@@ -58,11 +58,12 @@ export function MusicLists() {
         <>
           <ul className="overflow-y-scroll relative flex flex-col h-full">
             {filteredListsBySearch.map((track, i) => {
+              const realIndex = tracks.findIndex((t) => t.id === track.id);
               return (
                 <li key={track.id}>
                   <Button
                     onClick={() => {
-                      setCurrentIndex(i);
+                      setCurrentIndex(realIndex);
                     }}
                     variant={"ghost"}
                     className={`w-full justify-start ${track.id === currentTrack.id ? "bg-accent" : ""}`}
