@@ -65,10 +65,12 @@ export function MusicLists() {
                       setCurrentIndex(i);
                     }}
                     variant={"ghost"}
-                    className={`overflow-x-hidden w-full justify-baseline ${track.id === currentTrack.id ? "bg-accent" : ""}`}
+                    className={`w-full justify-start ${track.id === currentTrack.id ? "bg-accent" : ""}`}
                     size={"lg"}
                   >
-                    {track.artist} - {track.title}
+                    <span className="truncate">
+                      {track.artist} - {track.title}
+                    </span>
                   </Button>
                 </li>
               );

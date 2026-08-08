@@ -14,7 +14,11 @@ export function ListStatus() {
 
       <span className="flex items-center gap-1">
         <Kbd>space</Kbd>
-        select
+        Select
+      </span>
+
+      <span className="flex items-center gap-1">
+        <Kbd>shift + /</Kbd> Search {"->"} <Kbd>esc</Kbd> Close
       </span>
     </div>
   );
