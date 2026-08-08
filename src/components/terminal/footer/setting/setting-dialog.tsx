@@ -7,12 +7,17 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { Kbd } from "@/components/ui/kbd";
+import { useSettingStatus } from "@/state/setting-open";
 
 export function SettingDialog() {
+  const { isOpen, setIsOpen } = useSettingStatus();
   return (
-    <Dialog>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button variant={"ghost"}>Setting</Button>
+        <Button variant={"ghost"}>
+          <Kbd>S</Kbd>etting
+        </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>

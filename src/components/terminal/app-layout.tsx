@@ -6,10 +6,12 @@ import { MusicLists } from "./music-lists";
 import MusicPlayer from "./music-player";
 import { useFocusedDiv } from "@/state/app-ref";
 import { useStoreMusics } from "@/state/musics-state";
+import { useSettingStatus } from "@/state/setting-open";
 
 export default function AppLayout() {
   const setFocuesedPanel = useFocusedDiv((s) => s.setFocusedPanel);
   const tracks = useStoreMusics((s) => s.tracks);
+  const setIsOpenSetting = useSettingStatus((s) => s.setIsOpen);
 
   const isMusicLoaded = tracks && tracks.length > 0;
 
@@ -48,6 +50,17 @@ export default function AppLayout() {
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isMusicLoaded, setFocuesedPanel]);
+
+  useEffect(() => {
+    function handleSkeyDown(e: KeyboardEvent) {
+      if (e.key === "s") {
+        setIsOpenSetting(true);
+      }
+    }
+
+    window.addEventListener("keydown", handleSkeyDown);
+    return () => window.removeEventListener("keydown", handleSkeyDown);
+  }, [setIsOpenSetting]);
 
   return (
     <Card className="h-full p-4 grid grid-cols-1 grid-rows-[auto_1fr_auto]">
