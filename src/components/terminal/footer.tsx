@@ -2,6 +2,7 @@ import { useFocusedDiv } from "@/state/app-ref";
 import { useStoreMusics } from "@/state/musics-state";
 import { HeaderStatus } from "./footer/header-status";
 import { ListStatus } from "./footer/list-status";
+import { PlayerStatus } from "./footer/player-status";
 
 export default function TerminalFooter() {
   const tracks = useStoreMusics((s) => s.tracks);
@@ -28,7 +29,7 @@ export default function TerminalFooter() {
             ) : focusedPanel === "list" ? (
               <ListStatus />
             ) : focusedPanel === "player" ? (
-              <div>player</div>
+              <PlayerStatus />
             ) : focusedPanel === "footer" ? (
               <div>footer</div>
             ) : null}
