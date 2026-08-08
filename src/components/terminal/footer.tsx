@@ -1,5 +1,7 @@
 import { useFocusedDiv } from "@/state/app-ref";
 import { useStoreMusics } from "@/state/musics-state";
+import { HeaderStatus } from "./footer/header-status";
+import { ListStatus } from "./footer/list-status";
 
 export default function TerminalFooter() {
   const tracks = useStoreMusics((s) => s.tracks);
@@ -22,9 +24,9 @@ export default function TerminalFooter() {
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             {focusedPanel === "header" ? (
-              <div>header</div>
+              <HeaderStatus />
             ) : focusedPanel === "list" ? (
-              <div>list</div>
+              <ListStatus />
             ) : focusedPanel === "player" ? (
               <div>player</div>
             ) : focusedPanel === "footer" ? (
