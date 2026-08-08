@@ -3,6 +3,7 @@ import { useStoreMusics } from "@/state/musics-state";
 import { HeaderStatus } from "./footer/header-status";
 import { ListStatus } from "./footer/list-status";
 import { PlayerStatus } from "./footer/player-status";
+import { FooterStatus } from "./footer/footer-status";
 
 export default function TerminalFooter() {
   const tracks = useStoreMusics((s) => s.tracks);
@@ -31,7 +32,7 @@ export default function TerminalFooter() {
             ) : focusedPanel === "player" ? (
               <PlayerStatus />
             ) : focusedPanel === "footer" ? (
-              <div>footer</div>
+              <FooterStatus />
             ) : null}
           </div>
           <div>settings</div>

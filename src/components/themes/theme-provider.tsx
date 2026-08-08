@@ -62,7 +62,7 @@ export function ThemeProvider({
     </ThemeProviderContext.Provider>
   );
 }
-
+/* eslint-disable react-refresh/only-export-components */
 export const useTheme = () => {
   const context = useContext(ThemeProviderContext);
 
