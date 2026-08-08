@@ -77,7 +77,7 @@ export default function AppLayout() {
         ref={headerRef}
         id="title"
         tabIndex={isMusicLoaded ? -1 : undefined}
-        className="p-2 focus:ring-primary outline-none duration-150"
+        className="p-2 focus:ring-primary outline-none duration-150 overflow-visible relative"
       >
         <TerminalHeader />
       </Card>
