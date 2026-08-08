@@ -53,6 +53,15 @@ export default function AppLayout() {
 
   useEffect(() => {
     function handleSkeyDown(e: KeyboardEvent) {
+      const target = e.target as HTMLElement;
+      if (
+        target.tagName === "INPUT" ||
+        target.tagName === "TEXTAREA" ||
+        target.isContentEditable
+      ) {
+        return;
+      }
+
       if (e.key === "s") {
         setIsOpenSetting(true);
       }
