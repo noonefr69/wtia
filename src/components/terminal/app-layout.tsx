@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { Card } from "../ui/card";
-import TerminalFooter from "./footer";
+import TerminalFooter from "./footer/footer";
 import TerminalHeader from "./header";
 import { MusicLists } from "./music-lists";
 import MusicPlayer from "./music-player";

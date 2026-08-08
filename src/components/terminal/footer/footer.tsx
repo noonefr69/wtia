@@ -1,9 +1,10 @@
 import { useFocusedDiv } from "@/state/app-ref";
 import { useStoreMusics } from "@/state/musics-state";
-import { HeaderStatus } from "./footer/header-status";
-import { ListStatus } from "./footer/list-status";
-import { PlayerStatus } from "./footer/player-status";
-import { FooterStatus } from "./footer/footer-status";
+import { HeaderStatus } from "./status/header-status";
+import { ListStatus } from "./status/list-status";
+import { PlayerStatus } from "./status/player-status";
+import { FooterStatus } from "./status/footer-status";
+import { SettingDialog } from "./setting/setting-dialog";
 
 export default function TerminalFooter() {
   const tracks = useStoreMusics((s) => s.tracks);
@@ -35,7 +36,7 @@ export default function TerminalFooter() {
               <FooterStatus />
             ) : null}
           </div>
-          <div>settings</div>
+          <SettingDialog />
         </div>
       )}
     </>
