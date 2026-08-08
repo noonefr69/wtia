@@ -1,8 +1,13 @@
-# wtia
+# wtia – Terminal-Style Web Music Player
 
-> A terminal-style web-based music player.
+> A keyboard-driven music player that looks and feels like a terminal, right in your browser.  
+> No installation needed for users—just open the web app, upload local music files, and enjoy.
 
-**wtia** allows you to list and play your local music files directly in your web browser without installing any dedicated desktop software. It features a nostalgic terminal-inspired UI, vim-like keyboard shortcuts, and beautiful ASCII art.
+![wtia banner](https://img.shields.io/badge/built%20with-React-61DAFB?style=flat&logo=react)
+![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=flat&logo=typescript)
+![Vite](https://img.shields.io/badge/Vite-B73BFE?style=flat&logo=vite)
+![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=flat&logo=tailwind-css)
+![License](https://img.shields.io/badge/license-MIT-green)
 
 ## ✨ Features
 
