@@ -1,3 +1,4 @@
+import { ToggleTheme } from "@/components/themes/toggle-theme";
 import { Button } from "@/components/ui/button/button";
 import {
   Dialog,
@@ -15,17 +16,17 @@ export function SettingDialog() {
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button variant={"ghost"}>
+        <Button variant={"ghost"} className="flex items-center gap-0.5">
           <Kbd>S</Kbd>etting
         </Button>
       </DialogTrigger>
       <DialogContent>
-        <DialogHeader>
-          <DialogTitle>Are you absolutely sure?</DialogTitle>
-          <DialogDescription>
-            This action cannot be undone. This will permanently delete your
-            account and remove your data from our servers.
-          </DialogDescription>
+        <DialogHeader className="gap-0">
+          <DialogTitle>settings</DialogTitle>
+          <DialogDescription>nobody cares.</DialogDescription>
+          <div className="mt-4">
+            <ToggleTheme />
+          </div>
         </DialogHeader>
       </DialogContent>
     </Dialog>
