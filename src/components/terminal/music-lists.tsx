@@ -57,7 +57,7 @@ export function MusicLists() {
       ) : (
         <>
           <ul className="overflow-y-scroll relative flex flex-col h-full">
-            {filteredListsBySearch.map((track, i) => {
+            {filteredListsBySearch.map((track) => {
               const realIndex = tracks.findIndex((t) => t.id === track.id);
               return (
                 <li key={track.id}>

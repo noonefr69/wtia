@@ -10,7 +10,7 @@ import { flowerAscii } from "@/ascii/flower-ascii";
 import PrevButton from "../prev-button";
 import NextButton from "../next-button";
 import { Pause, Play, RedoIcon, UndoIcon } from "lucide-react";
-// import { RedoIcon } from "lucide-react";
+import { useSaturationImage } from "@/state/saturation-image";
 
 export default function MusicPlayer() {
   const { tracks, currentIndex, next, prev } = useStoreMusics();
@@ -20,6 +20,7 @@ export default function MusicPlayer() {
   const [isVolumeMute, setIsVolumeMute] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
+  const { isItTrue } = useSaturationImage();
 
   const containerRef = useRef<HTMLDivElement>(null);
   const preRef = useRef<HTMLPreElement>(null);
@@ -209,8 +210,8 @@ export default function MusicPlayer() {
         <img
           src={currentTrack.coverUrl ?? ""}
           alt={currentTrack.artist + currentTrack.title}
-          className="w-full aspect-square object-cover brightness-75 opacity-80"
-          style={{ filter: "saturate(0.0)" }}
+          className="w-full aspect-square object-cover"
+          style={{ filter: isItTrue ? "saturate(0.0)" : "" }}
         />
       )}
       <div className="mt-2 flex items-center justify-between gap-2">

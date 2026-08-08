@@ -25,7 +25,7 @@ export default function TerminalFooter() {
         </div>
       ) : (
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
+          <div className="items-center gap-2 md:flex hidden">
             {focusedPanel === "header" ? (
               <HeaderStatus />
             ) : focusedPanel === "list" ? (
