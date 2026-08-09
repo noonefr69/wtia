@@ -33,6 +33,11 @@ export function PlayerStatus() {
         <Kbd>o</Kbd>
         Vol+
       </span>
+
+      <span className="flex items-center gap-1">
+        <Kbd>m</Kbd>
+        Mute
+      </span>
     </div>
   );
 }

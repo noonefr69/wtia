@@ -6,4 +6,5 @@ export const playerShortCuts = [
   { kbd: "i", kbdInfo: "Skip 5 seconds Forward" },
   { kbd: "y", kbdInfo: "Increase Volume +5%" },
   { kbd: "o", kbdInfo: "Decrease Volume -5%" },
+  { kbd: "m", kbdInfo: "Mute song" },
 ];
