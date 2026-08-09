@@ -50,7 +50,7 @@ export function MusicLists() {
           <span className="">
             <span className="text-indigo-800">wtia </span>in{" "}
             <span className="text-green-800">~</span>{" "}
-            <span className="text-orange-800">here</span>
+            <span className="text-orange-800">⯪</span>
           </span>
           <MusicInput />
         </div>
