@@ -192,7 +192,7 @@ export default function MusicPlayer() {
     );
 
   return (
-    <div className="h-full flex flex-col">
+    <div className="h-full flex flex-col no-scrollbar">
       {!currentTrack.coverUrl ? (
         <>
           <img
@@ -214,7 +214,7 @@ export default function MusicPlayer() {
           style={{ filter: isItTrue ? "saturate(0.0)" : "" }}
         />
       )}
-      <div className="mt-2 flex items-center justify-between gap-2">
+      <div className="mt-2 flex items-center justify-between gap-2 no-scrollbar">
         {formatTime(currentTime)}
         <Slider
           value={[currentTime]}

@@ -94,7 +94,7 @@ export default function AppLayout() {
           id="aside"
           tabIndex={isMusicLoaded ? -1 : undefined}
           ref={playerRef}
-          className="col-span-9 md:col-span-3 p-2 min-h-0 overflow-y-scroll outline-none focus:ring-primary duration-150"
+          className="no-scrollbar col-span-9 md:col-span-3 p-2 min-h-0 overflow-y-scroll outline-none focus:ring-primary duration-150"
         >
           <MusicPlayer />
         </Card>

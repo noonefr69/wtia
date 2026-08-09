@@ -44,7 +44,7 @@ export function MusicLists() {
   }, [inputValue, tracks]);
 
   return (
-    <div className="flex flex-col h-full overflow-hidden">
+    <div className="flex flex-col h-full overflow-hidden ">
       {!tracks || tracks.length === 0 ? (
         <div className="flex flex-row items-center gap-2">
           <span className="">
@@ -56,7 +56,7 @@ export function MusicLists() {
         </div>
       ) : (
         <>
-          <ul className="overflow-y-scroll relative flex flex-col h-full">
+          <ul className="overflow-y-scroll relative flex flex-col h-full no-scrollbar">
             {filteredListsBySearch.map((track) => {
               const realIndex = tracks.findIndex((t) => t.id === track.id);
               return (
